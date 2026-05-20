@@ -368,6 +368,14 @@
       font-size: 0.72rem;
       color: rgba(44, 19, 5, 0.4);
       margin-top: 14px;
+      margin-bottom: 6px;
+    }
+
+    .optin-note {
+      text-align: center;
+      font-size: 0.68rem;
+      color: rgba(44, 19, 5, 0.32);
+      line-height: 1.5;
     }
 
     /* ── THANK YOU STATE ──────────────────────────────────── */
@@ -398,28 +406,6 @@
       color: rgba(44, 19, 5, 0.6);
       margin-bottom: 28px;
       line-height: 1.6;
-    }
-
-    .download-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      padding: 17px 20px;
-      background: var(--orange);
-      color: #fff;
-      border-radius: var(--radius-field);
-      font-family: var(--font-display);
-      font-weight: 900;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: background 0.18s, transform 0.1s;
-      margin-bottom: 16px;
-    }
-    .download-btn:hover {
-      background: #cc4e22;
-      transform: translateY(-1px);
     }
 
     .email-confirm {
@@ -496,7 +482,7 @@
     <div class="offer">
       <div class="badge">
         <span class="badge-dot"></span>
-        Free Resource · 2025
+        Free Resource · 2026
       </div>
 
       <h1 class="headline">Bidya<br>Funding<br>Radar</h1>
@@ -542,8 +528,8 @@
           </svg>
         </div>
         <div class="pdf-meta">
-          <strong>Bidya Funding Radar — 2025 Edition</strong>
-          <span>PDF · Free · Instant download after signup</span>
+          <strong>Bidya Funding Radar — May 2026 Edition</strong>
+          <span>PDF · Free · Sent to your email after signup</span>
         </div>
       </div>
     </div>
@@ -559,7 +545,7 @@
       <div class="form-body" id="formBody">
         <div class="form-header">
           <h2>Get your free copy</h2>
-          <p>Fill in a few details below. We'll send it straight to your inbox — and you can download it right here on this page too.</p>
+          <p>Fill in a few details below and we'll send the guide straight to your inbox.</p>
         </div>
 
         <form id="radarForm" novalidate>
@@ -624,7 +610,8 @@
             <span class="spinner" aria-hidden="true"></span>
           </button>
 
-          <p class="privacy">No spam. No selling your data. Just the guide.</p>
+          <p class="privacy">No spam. Just the guide.</p>
+          <p class="optin-note">By submitting, you agree to receive the Funding Radar and occasional updates from Bidya. Unsubscribe anytime.</p>
         </form>
       </div>
 
@@ -637,33 +624,13 @@
             <polyline points="20 6 9 17 4 12"/>
           </svg>
         </div>
-        <h2>You're in. Here's your guide.</h2>
+        <h2>You're in — check your inbox.</h2>
         <p class="ty-sub">
-          We've sent a copy to your inbox too — check your email
-          (and your spam folder, just in case).
+          The Funding Radar is on its way to your email.
+          If you don't see it in a few minutes, check your spam folder.
         </p>
-
-        <!--
-          Replace the href below with your Google Drive PDF share link.
-          In Drive: right-click the PDF → Share → "Anyone with the link" → Copy link
-        -->
-        <a href="YOUR_GOOGLE_DRIVE_PDF_LINK_HERE"
-           class="download-btn"
-           target="_blank"
-           rel="noopener noreferrer"
-           id="downloadLink">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2.5"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
-          Download Funding Radar PDF
-        </a>
-
         <p class="email-confirm">
-          A copy has been sent to <strong id="confirmedEmail"></strong>
+          Sent to <strong id="confirmedEmail"></strong>
         </p>
       </div>
 
@@ -672,7 +639,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 Bidya. Built for African SMEs that mean business.</p>
+    <p>&copy; 2026 Bidya. Built for African SMEs that mean business.</p>
     <p style="margin-top:6px">
       <a href="https://bidyahq.com">bidyahq.com</a>
     </p>
@@ -680,17 +647,9 @@
 
   <!-- JAVASCRIPT -->
   <script>
-    // ─── TWO THINGS TO CONFIGURE ──────────────────────────────
-    //
-    // 1. Paste your Make.com webhook URL below
-    //    (Make.com → Add module → Webhooks → Custom webhook → Copy URL)
-    //
+    // Paste your Make.com webhook URL here.
+    // (Make.com → Add module → Webhooks → Custom webhook → Copy URL)
     const MAKE_WEBHOOK_URL = 'YOUR_MAKE_COM_WEBHOOK_URL_HERE';
-    //
-    // 2. Replace YOUR_GOOGLE_DRIVE_PDF_LINK_HERE in the <a> tag above
-    //    with your actual Google Drive share link
-    //
-    // ─────────────────────────────────────────────────────────
 
     const form        = document.getElementById('radarForm');
     const formBody    = document.getElementById('formBody');
@@ -761,7 +720,7 @@
       submitBtn.classList.add('loading');
 
       // Sends to Make.com; no-cors because Make doesn't need CORS headers from us.
-      // Even if this fails the user still sees the thank-you and download button.
+      // Even if this fails we still show the thank-you — Make handles the actual email.
       try {
         await fetch(MAKE_WEBHOOK_URL, {
           method: 'POST',
