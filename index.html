@@ -68,18 +68,14 @@
     }
 
     .nav-logo {
-      font-family: var(--font-display);
-      font-weight: 900;
-      font-size: 1.9rem;
-      color: var(--yellow);
-      letter-spacing: -1px;
-      text-transform: lowercase;
+      display: inline-flex;
+      align-items: center;
       text-decoration: none;
       line-height: 1;
     }
-    .nav-logo em {
-      font-style: normal;
-      color: var(--cream);
+    .nav-logo img {
+      height: 44px;
+      width: auto;
     }
 
     .nav-tag {
@@ -466,7 +462,9 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">bid<em>Ya</em></a>
+    <a href="#" class="nav-logo">
+      <img src="logo.svg" alt="BidYa" width="140" height="89">
+    </a>
     <span class="nav-tag">You're not building alone.</span>
   </nav>
 
