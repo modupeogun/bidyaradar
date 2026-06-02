@@ -717,14 +717,11 @@
       submitBtn.disabled = true;
       submitBtn.classList.add('loading');
 
-      // Sends to Make.com; no-cors because Make doesn't need CORS headers from us.
-      // Even if this fails we still show the thank-you — Make handles the actual email.
       try {
         await fetch(MAKE_WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
-          mode: 'no-cors',
         });
       } catch (err) {
         console.warn('Webhook did not respond:', err);
